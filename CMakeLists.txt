@@ -28,8 +28,10 @@ option(
 # namespaced library
 if (LFP_FMT_HEADER_ONLY)
     set(fmtlib fmt::fmt-header-only)
+    set(link-fmt PRIVATE)
 else ()
     set(fmtlib fmt::fmt)
+    set(link-fmt PUBLIC)
 endif ()
 
 set(CMAKE_CXX_STANDARD 11)
@@ -68,7 +70,7 @@ add_library(lfp
 add_library(lfp::lfp ALIAS lfp)
 
 target_link_libraries(lfp
-    PUBLIC
+    ${link-fmt}
         ${fmtlib}
 )
 
